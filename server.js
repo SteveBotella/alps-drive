@@ -1,7 +1,10 @@
-const http = require('http');
-const main = require('./main');
+//app.js
 
-main.set('port', process.env.PORT || 3000);
-const server = http.createServer(main);
+const express = require('express');
+const app = express();
 
-server.listen(process.env.PORT || 3000);
+app.use((req, res) => {
+    res.json({message: "Ca marche"});
+});
+
+module.exports = app;

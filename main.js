@@ -1,9 +1,9 @@
-const express = require('express');
+//server.js
 
-const main = express();
+const http = require('http');
+const app = require('./server');
+const server = http.createServer(app);
 
-main.use((req, res) => {
-    res.json({message: "Request done"});
-});
+app.set('port', process.env.PORT || 3000);
 
-module.exports = main;
+server.listen(process.env.PORT || 3000);
