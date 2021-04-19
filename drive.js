@@ -2,7 +2,7 @@ const path = require("path")
 const fs = require("fs/promises")
 
 function listAll() {
-
+    console.log("Tete de bite");
 };
 
 const directoryPath = path.join(__dirname, "files")
@@ -17,6 +17,6 @@ fs.readdir(directoryPath, function(err, files) {
     }
 })
 
-modules.exports = {
-    list: listAll,
-}
+module.exports = {
+    listAll: listAll,
+};
