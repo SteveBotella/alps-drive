@@ -1,8 +1,6 @@
 const drive = require('./drive');
-const http = require('http');
-const app = require('./server');
-const server = http.createServer(app);
+const server = require('./server');
 
-app.set('port', process.env.PORT || 3000);
-
-server.listen(process.env.PORT || 3000);
+drive.createRootFolder().then(() => {
+    server.start();
+})
