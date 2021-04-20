@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs/promises')
 const os = require('os')
 const ALPS_DRIVE_ROOT = path.join(os.tmpdir(), 'alpsDrive')
+let actualPath = "/";
 
 function logFolderExist() {
     console.log("Folder exist");
@@ -25,8 +26,10 @@ function createRootFolder() {
 }
 
 // List all the files and folder
-function listAll() {
-    const allFoldersAndFilesPromise = fs.readdir(ALPS_DRIVE_ROOT, {withFileTypes:true})
+function listAll(newPath) {
+    actualPath = newPath
+    let folder = ALPS_DRIVE_ROOT + actualPath;
+    const allFoldersAndFilesPromise = fs.readdir(folder, {withFileTypes:true})
     return allFoldersAndFilesPromise.then((folderAndFilesList) => {
         //console.log(folderAndFilesList)
         const folderAndFilesTab = []
@@ -42,12 +45,28 @@ function listAll() {
 }
 
 // Open a selected file or folder
-function openFileOrFolder() {
+function openFileOrFolder(name) {
+    const path = path.join(ALPS_DRIVE_ROOT, name)
+    const stat = fs.stat(path)
+        .then(resultFile => {
+            return resultFile.isFile() //Return true or false
+        })
+    return stat;
+}
 
+// Display file
+function displayContent(name) {
+    const path = path.join(ALPS_DRIVE_ROOT, name);
+    const read = fs.readFile(path)
+        .then((data) => {
+            return data;
+        })
+    return read;
 }
 
 module.exports = {
     createRootFolder: createRootFolder,
     listAll: listAll,
     openFileOrFolder: openFileOrFolder,
+    displayContent: displayContent ,
 };

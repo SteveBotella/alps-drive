@@ -8,17 +8,25 @@ function start() {
     })
 }
 
-app.get("/api/drive", (req, res) => {
-    drive.listAll().then(list => {
+app.get("/api/drive/", (req, res) => {
+    drive.listAll("/").then(list => {
         res.send(list);
     })
 });
 
-app.get("/api/drive/{name}", (req, res) => {
-   drive.openFileOrFolder(name).then(result => {
-       res.send(result)
-   })
+app.get("/api/drive/:name", (req, res) => {
+   let name = req.params.name;
+   let promise = drive.openFileOrFolder(name);
+
+   promise.then((isFile) => {
+       if (isFile) {
+
+       } else {
+
+       }
 });
+
+
 
 module.exports = {
     start: start,
