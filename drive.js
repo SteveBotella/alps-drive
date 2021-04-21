@@ -59,14 +59,6 @@ function displayContent(name) {
     return read
 }
 
-/*
-return read.then((data) => {
-            return data;
-    }).catch((err) => {
-        console.log(err)
-    })
- */
-
 module.exports = {
     createRootFolder: createRootFolder,
     listAll: listAll,

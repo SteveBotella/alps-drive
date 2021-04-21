@@ -21,8 +21,8 @@ app.get("/api/drive/:name", (req, res) => {
     promise.then((isFile) => {
         if (isFile) {
             let file = drive.displayContent(name);
-            file.then((data) => {
-                console.log(data)
+            file.then((name) => {
+                return name
                 //return data;
             }).catch((err) => {
                 console.log(err)
