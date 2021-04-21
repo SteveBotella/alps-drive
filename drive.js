@@ -48,17 +48,16 @@ function listAll(newPath) {
 function openFileOrFolder(name) {
     const path = path.join(ALPS_DRIVE_ROOT, name)
     const stat = fs.stat(path)
-        .then(resultFile => {
+        return stat.then(resultFile => {
             return resultFile.isFile() //Return true or false
         })
-    return stat;
 }
 
 // Display file
 function displayContent(name) {
     const path = path.join(ALPS_DRIVE_ROOT, name);
     const read = fs.readFile(path)
-        .then((data) => {
+        read.then((data) => {
             return data;
         })
     return read;

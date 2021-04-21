@@ -15,18 +15,22 @@ app.get("/api/drive/", (req, res) => {
 });
 
 app.get("/api/drive/:name", (req, res) => {
-   let name = req.params.name;
-   let promise = drive.openFileOrFolder(name);
+    let name = req.params.name;
+    let promise = drive.openFileOrFolder(name);
 
-   promise.then((isFile) => {
-       if (isFile) {
-
-       } else {
-
-       }
-});
-
-
+    promise.then((isFile) => {
+        if (isFile) {
+            let file = drive.displayContent(name);
+            file.then(() => {
+                res.sendFile(name);
+            })
+        } else {
+            drive.listAll("/" + name).then((list) => {
+                res.send(list);
+            })
+        }
+    });
+})
 
 module.exports = {
     start: start,
