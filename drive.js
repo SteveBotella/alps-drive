@@ -5,7 +5,6 @@ const ALPS_DRIVE_ROOT = path.join(os.tmpdir(), 'alpsDrive')
 let actualPath = "/";
 
 function logFolderExist() {
-    console.log("Folder exist");
 }
 
 // Create a folder alpsDrive
@@ -46,8 +45,8 @@ function listAll(newPath) {
 
 // Open a selected file or folder
 function openFileOrFolder(name) {
-    const path = path.join(ALPS_DRIVE_ROOT, name)
-    const stat = fs.stat(path)
+    const pathValue = path.join(ALPS_DRIVE_ROOT, name)
+    const stat = fs.stat(pathValue)
         return stat.then(resultFile => {
             return resultFile.isFile() //Return true or false
         })
@@ -55,13 +54,18 @@ function openFileOrFolder(name) {
 
 // Display file
 function displayContent(name) {
-    const path = path.join(ALPS_DRIVE_ROOT, name);
-    const read = fs.readFile(path)
-        read.then((data) => {
-            return data;
-        })
-    return read;
+    const pathValue = path.join(ALPS_DRIVE_ROOT, name);
+    const read = fs.readFile(pathValue)
+    return read
 }
+
+/*
+return read.then((data) => {
+            return data;
+    }).catch((err) => {
+        console.log(err)
+    })
+ */
 
 module.exports = {
     createRootFolder: createRootFolder,

@@ -21,15 +21,21 @@ app.get("/api/drive/:name", (req, res) => {
     promise.then((isFile) => {
         if (isFile) {
             let file = drive.displayContent(name);
-            file.then(() => {
-                res.sendFile(name);
+            file.then((data) => {
+                console.log(data)
+                //return data;
+            }).catch((err) => {
+                console.log(err)
             })
         } else {
             drive.listAll("/" + name).then((list) => {
                 res.send(list);
             })
         }
-    });
+    })
+        .catch((err) => {
+        console.log(err)
+    })
 })
 
 module.exports = {
