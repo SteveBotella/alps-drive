@@ -43,8 +43,8 @@ function listAll(newPath) {
     })
 }
 
-// Open a selected file or folder
-function openFileOrFolder(name) {
+// Is file or folder
+function isFileOrFolder(name) {
     const pathValue = path.join(ALPS_DRIVE_ROOT, name)
     const stat = fs.stat(pathValue)
         return stat.then(resultFile => {
@@ -52,7 +52,7 @@ function openFileOrFolder(name) {
         })
 }
 
-// Display file
+// Display file or open folder
 function displayContent(name) {
     const pathValue = path.join(ALPS_DRIVE_ROOT, name);
     const read = fs.readFile(pathValue, 'utf8', function (err,data) {
@@ -64,12 +64,14 @@ function displayContent(name) {
     return read
 }
 
+// Create folder
 function createFolder(name) {
     const pathValue = path.join(ALPS_DRIVE_ROOT, name);
     const createdFolder = fs.mkdir(pathValue)
     return createdFolder
 }
 
+// Delete folder
 function deleteFolder(name) {
     const pathValue = path.join(ALPS_DRIVE_ROOT, name);
     const deleteDirectory = fs.rmdir(pathValue)
@@ -79,7 +81,7 @@ function deleteFolder(name) {
 module.exports = {
     createRootFolder: createRootFolder,
     listAll: listAll,
-    openFileOrFolder: openFileOrFolder,
+    isFileOrFolder: isFileOrFolder,
     displayContent: displayContent ,
     createFolder: createFolder,
     deleteFolder: deleteFolder,

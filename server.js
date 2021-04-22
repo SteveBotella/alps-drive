@@ -8,15 +8,18 @@ function start() {
     })
 }
 
+// List all folders and files
 app.get("/api/drive/", (req, res) => {
     drive.listAll("/").then(list => {
         res.send(list);
     })
 });
 
+
+// Open folder or file
 app.get("/api/drive/:name", (req, res) => {
     let name = req.params.name;
-    let promise = drive.openFileOrFolder(name);
+    let promise = drive.isFileOrFolder(name);
 
     promise.then((isFile) => {
         if (isFile) {
@@ -38,6 +41,7 @@ app.get("/api/drive/:name", (req, res) => {
     })
 })
 
+// Create folder
 app.post("/api/drive", (req, res) => {
     const newDirectory = drive.createFolder(req.query.name)
     newDirectory.then((newFolder) => {
@@ -45,6 +49,7 @@ app.post("/api/drive", (req, res) => {
     })
 })
 
+// Delete Folder
 app.delete("/api/drive/:name", (req, res) => {
     const deleteDirectory = drive.deleteFolder(req.params.name)
     deleteDirectory.then((oldFolder) => {
