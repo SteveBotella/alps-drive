@@ -38,7 +38,7 @@ function listAll(newPath) {
                 isFolder: result.isDirectory(),
             })
         })
-        //console.log(folderAndFilesTab)
+        //console.log(folderAndFilesList)
         return folderAndFilesTab
     })
 }
@@ -55,8 +55,25 @@ function openFileOrFolder(name) {
 // Display file
 function displayContent(name) {
     const pathValue = path.join(ALPS_DRIVE_ROOT, name);
-    const read = fs.readFile(pathValue)
+    const read = fs.readFile(pathValue, 'utf8', function (err,data) {
+        if (err) {
+            return console.log(err);
+        }
+    });
+    console.log(ALPS_DRIVE_ROOT)
     return read
+}
+
+function createFolder(name) {
+    const pathValue = path.join(ALPS_DRIVE_ROOT, name);
+    const createdFolder = fs.mkdir(pathValue)
+    return createdFolder
+}
+
+function deleteFolder(name) {
+    const pathValue = path.join(ALPS_DRIVE_ROOT, name);
+    const deleteDirectory = fs.rmdir(pathValue)
+    return deleteDirectory
 }
 
 module.exports = {
@@ -64,4 +81,6 @@ module.exports = {
     listAll: listAll,
     openFileOrFolder: openFileOrFolder,
     displayContent: displayContent ,
+    createFolder: createFolder,
+    deleteFolder: deleteFolder,
 };
