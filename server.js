@@ -41,7 +41,7 @@ app.get("/api/drive/:name", (req, res) => {
     })
 })
 
-// Create folder
+// Create folder in root
 app.post("/api/drive", (req, res) => {
     const newDirectory = drive.createFolder(req.query.name)
     newDirectory.then((newFolder) => {
@@ -49,12 +49,17 @@ app.post("/api/drive", (req, res) => {
     })
 })
 
-// Delete Folder
+// Delete Folder in root
 app.delete("/api/drive/:name", (req, res) => {
     const deleteDirectory = drive.deleteFolder(req.params.name)
     deleteDirectory.then((oldFolder) => {
         res.send(oldFolder)
     })
+})
+
+// Create folder in folder
+app.post("/api/drive/*/:name", (req, res) => {
+    //let acutalUrl = req.url
 })
 
 module.exports = {
