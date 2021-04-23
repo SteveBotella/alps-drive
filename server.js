@@ -1,6 +1,12 @@
 const express = require('express');
+const bb = require('express-busboy');
 const app = express();
 const drive = require('./drive');
+
+bb.extend(app, {
+        upload: true,
+        path: 'C:/Users/steve/AppData/Local/Temp/alpsDrive'
+    })
 
 function start() {
     app.use(express.static('frontend'));

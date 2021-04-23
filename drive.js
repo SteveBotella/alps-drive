@@ -10,6 +10,7 @@ function logFolderExist() {
 // Create a folder alpsDrive
 function createRootFolderNoVerify() {
     return fs.mkdir(ALPS_DRIVE_ROOT);
+    console.log(ALPS_DRIVE_ROOT)
 }
 
 // Check if foler exist
@@ -60,7 +61,6 @@ function displayContent(name) {
             return console.log(err);
         }
     });
-    console.log(ALPS_DRIVE_ROOT)
     return read
 }
 
