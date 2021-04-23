@@ -59,7 +59,7 @@ app.delete("/api/drive/:name", (req, res) => {
 
 // Create folder in folder
 app.post("/api/drive/*/:name", (req, res) => {
-    //let acutalUrl = req.url
+    //let actualUrl = req.url
 })
 
 module.exports = {
